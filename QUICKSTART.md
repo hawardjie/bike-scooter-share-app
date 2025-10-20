@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-## Your Bike & Scooter Share Dashboard is Ready!
+## Your Bike & Scooter Sharing is Ready!
 
 The application is currently running at: **http://localhost:3000**
 

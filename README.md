@@ -1,4 +1,4 @@
-# Bike & Scooter Share Dashboard
+# Bike & Scooter Sharing
 
 A modern, real-time dashboard for monitoring bike and scooter sharing systems using GBFS (General Bikeshare Feed Specification) data from multiple operators.
 

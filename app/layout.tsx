@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bike & Scooter Share Dashboard",
+  title: "Bike & Scooter Sharing",
   description: "Real-time availability dashboard for bike and scooter sharing systems using GBFS data",
   keywords: ["bike share", "scooter share", "GBFS", "micromobility", "real-time data"],
 };
