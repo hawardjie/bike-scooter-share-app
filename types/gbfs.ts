@@ -13,8 +13,12 @@ export interface GBFSFeed {
   url: string;
 }
 
+// GBFS v2.x uses language-specific feeds (en, fr, es, etc.)
+// GBFS v3.0 has feeds directly in data
 export interface GBFSFeeds {
-  feeds: GBFSFeed[];
+  [language: string]: {
+    feeds: GBFSFeed[];
+  };
 }
 
 export interface SystemInformation {
