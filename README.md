@@ -1,6 +1,6 @@
 # Bike & Scooter Sharing
 
-A modern, real-time dashboard for monitoring bike and scooter sharing systems using GBFS (General Bikeshare Feed Specification) data from multiple operators.
+A modern, real-time dashboard designed to provide comprehensive monitoring and analysis of bike and scooter sharing systems across various cities. Utilizing GBFS (General Bikeshare Feed Specification) data from multiple operators, the platform aggregates and displays up-to-the-minute information on fleet availability, vehicle locations, and station status. Its intuitive interface allows city planners, operators, and everyday users to easily track live trends, optimize routes, and make data-driven decisions for enhanced mobility and urban planning.
 
 ## Features
 
