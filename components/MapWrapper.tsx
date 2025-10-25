@@ -2,15 +2,18 @@
 
 import { useEffect, useState, useRef } from 'react';
 import type { StationWithStatus, FreeBikeStatus } from '@/types/gbfs';
+import type { ParkingFacility } from '@/types/parking';
 
 interface MapWrapperProps {
   stations: StationWithStatus[];
   freeBikes: FreeBikeStatus[];
+  parkingFacilities?: ParkingFacility[];
   center?: [number, number];
   zoom?: number;
+  onMapMove?: (center: [number, number], zoom: number) => void;
 }
 
-export default function MapWrapper({ stations, freeBikes, center, zoom }: MapWrapperProps) {
+export default function MapWrapper({ stations, freeBikes, parkingFacilities, center, zoom, onMapMove }: MapWrapperProps) {
   const [Map, setMap] = useState<any>(null);
   const hasMounted = useRef(false);
 
@@ -33,5 +36,5 @@ export default function MapWrapper({ stations, freeBikes, center, zoom }: MapWra
     );
   }
 
-  return <Map key="stable-map" stations={stations} freeBikes={freeBikes} center={center} zoom={zoom} />;
+  return <Map key="stable-map" stations={stations} freeBikes={freeBikes} parkingFacilities={parkingFacilities} center={center} zoom={zoom} onMapMove={onMapMove} />;
 }

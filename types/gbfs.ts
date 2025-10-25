@@ -141,3 +141,6 @@ export interface StationWithStatus extends Station {
   availableDocks: number;
   isActive: boolean;
 }
+
+// Import parking types
+export type { ParkingFacility, ParkingData } from './parking';
