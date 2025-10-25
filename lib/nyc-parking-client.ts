@@ -207,20 +207,16 @@ export class NYCParkingClient {
         return {
           id: uniqueId,
           name: 'Parking Lot',
-          address: undefined, // Not in this dataset
           city: 'New York',
           state: 'NY',
-          zip: undefined,
           lat: coords.lat,
           lng: coords.lng,
           type: 'lot' as const,
           capacity: estimatedCapacity && estimatedCapacity > 0 ? estimatedCapacity : undefined,
           operator: 'NYC',
-          hours: undefined,
-          rates: undefined,
           source: 'nyc_open_data' as const,
           sourceId: String(row.source_id),
-        };
+        } as ParkingFacility;
       }).filter((f): f is ParkingFacility =>
         f !== null && Number.isFinite(f.lat) && Number.isFinite(f.lng)
       );
