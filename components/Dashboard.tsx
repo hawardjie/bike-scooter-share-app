@@ -324,7 +324,7 @@ export default function Dashboard() {
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1">
                 <div className="flex-shrink-0">
-                  <h1 className="text-2xl lg:text-3xl font-bold flex items-center gap-2" style={{ color: 'rgb(52, 211, 153)' }}>
+                  <h1 className="text-3xl lg:text-4xl font-bold flex items-center gap-2 font-[family-name:var(--font-italiana)]" style={{ color: 'rgb(52, 211, 153)' }}>
                     <img src="/images/logo.png" alt="Sharing.Guru Logo" className="h-8 lg:h-10 w-auto" />
                     Sharing.Guru
                   </h1>

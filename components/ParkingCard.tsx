@@ -44,9 +44,11 @@ export default function ParkingCard({ facility, onClick }: ParkingCardProps) {
         </h3>
       </div>
 
-      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
-        {facility.address || 'Address unavailable'}{facility.city ? `, ${facility.city}` : ''}{facility.state ? `, ${facility.state}` : ''} {facility.zip || ''}
-      </p>
+      {facility.address && (
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
+          {facility.address}{facility.city ? `, ${facility.city}` : ''}{facility.state ? `, ${facility.state}` : ''} {facility.zip || ''}
+        </p>
+      )}
 
       {/* Rating */}
       {/* Ratings not available for generic datasets */}

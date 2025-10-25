@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
+import { Italiana } from "next/font/google";
 import "./globals.css";
+
+const italiana = Italiana({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-italiana',
+});
 
 export const metadata: Metadata = {
   title: "Bike & Scooter Sharing",
@@ -22,7 +29,7 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body className="antialiased">
+      <body className={`${italiana.variable} antialiased`}>
         {children}
       </body>
     </html>

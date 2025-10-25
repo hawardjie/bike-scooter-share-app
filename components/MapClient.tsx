@@ -236,9 +236,11 @@ export default function Map({ stations, freeBikes, parkingFacilities = [], cente
                 <span className="text-xl">🅿️</span>
               </div>
               <div className="space-y-1 text-sm">
-                <div className="text-gray-600 mb-2">
-                  {(facility.address || 'Address unavailable')}{facility.city ? `, ${facility.city}` : ''}{facility.state ? `, ${facility.state}` : ''}
-                </div>
+                {facility.address && (
+                  <div className="text-gray-600 mb-2">
+                    {facility.address}{facility.city ? `, ${facility.city}` : ''}{facility.state ? `, ${facility.state}` : ''}
+                  </div>
+                )}
 
                 {facility.distanceMiles !== undefined && (
                   <div className="flex justify-between">

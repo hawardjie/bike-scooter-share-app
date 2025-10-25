@@ -57,6 +57,10 @@ function calculateCentroid(coordinates: number[][]): { lat: number; lng: number 
 async function reverseGeocode(lat: number, lng: number): Promise<string | null> {
   try {
     // Use Nominatim (OpenStreetMap) reverse geocoding - free and no API key required
+    // Add timeout to prevent hanging requests
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
     const response = await fetch(
       `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`,
       {
@@ -64,8 +68,11 @@ async function reverseGeocode(lat: number, lng: number): Promise<string | null> 
           'User-Agent': 'BikeScooterShareApp/1.0', // Required by Nominatim
         },
         cache: 'force-cache', // Cache aggressively since addresses don't change
+        signal: controller.signal,
       }
     );
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       return null;
@@ -84,7 +91,8 @@ async function reverseGeocode(lat: number, lng: number): Promise<string | null> 
 
     return parts.length > 0 ? parts.join(' ') : null;
   } catch (error) {
-    console.error('[NYC Parking] Reverse geocoding error:', error);
+    // Silently fail on timeout or network errors - addresses are optional
+    // These are expected failures when Nominatim is overloaded or rate limiting
     return null;
   }
 }
@@ -332,31 +340,37 @@ export class NYCParkingClient {
     console.log(`[NYC Parking] Fetching addresses for ${facilityIds.length} facilities...`);
     const addressMap = new Map<string, string>();
 
-    // Limit to first 20 to avoid long delays
-    const idsToGeocode = facilityIds.slice(0, 20);
+    // Limit to first 10 to avoid overwhelming Nominatim and reduce timeouts
+    const idsToGeocode = facilityIds.slice(0, 10);
 
-    // Process in parallel with Promise.allSettled to handle failures gracefully
-    const geocodeResults = await Promise.allSettled(
-      idsToGeocode.map(async (id) => {
-        const facility = facilities.find(f => f.id === id);
-        if (!facility) return { id, address: null };
+    // Process in batches of 2 with delays to respect rate limits and avoid connection errors
+    const BATCH_SIZE = 2;
 
-        try {
+    for (let i = 0; i < idsToGeocode.length; i += BATCH_SIZE) {
+      const batchIds = idsToGeocode.slice(i, i + BATCH_SIZE);
+
+      const geocodeResults = await Promise.allSettled(
+        batchIds.map(async (id) => {
+          const facility = facilities.find(f => f.id === id);
+          if (!facility) return { id, address: null };
+
           const address = await reverseGeocode(facility.lat, facility.lng);
           return { id, address };
-        } catch (error) {
-          console.error('[NYC Parking] Geocoding failed for facility:', id);
-          return { id, address: null };
-        }
-      })
-    );
+        })
+      );
 
-    // Build address map
-    geocodeResults.forEach((result) => {
-      if (result.status === 'fulfilled' && result.value.address) {
-        addressMap.set(result.value.id, result.value.address);
+      // Build address map from batch results
+      geocodeResults.forEach((result) => {
+        if (result.status === 'fulfilled' && result.value.address) {
+          addressMap.set(result.value.id, result.value.address);
+        }
+      });
+
+      // Wait 2 seconds between batches to reduce connection errors
+      if (i + BATCH_SIZE < idsToGeocode.length) {
+        await new Promise(resolve => setTimeout(resolve, 2000));
       }
-    });
+    }
 
     console.log(`[NYC Parking] Successfully geocoded ${addressMap.size} addresses`);
     return addressMap;
