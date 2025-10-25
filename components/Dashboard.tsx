@@ -323,30 +323,12 @@ export default function Dashboard() {
           <div className="px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <h1 className="text-2xl lg:text-3xl font-bold flex items-center gap-2" style={{ color: 'rgb(52, 211, 153)' }}>
-                      <img src="/images/logo.png" alt="Sharing.Guru Logo" className="h-8 lg:h-10 w-auto" />
-                      Sharing.Guru
-                    </h1>
-                  </div>
-                  {/* Search Box - Desktop (hidden on mobile) */}
-                  <input
-                    type="text"
-                    placeholder="Search locations..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="hidden md:block flex-1 px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm mt-1"
-                  />
+                <div className="flex-shrink-0">
+                  <h1 className="text-2xl lg:text-3xl font-bold flex items-center gap-2" style={{ color: 'rgb(52, 211, 153)' }}>
+                    <img src="/images/logo.png" alt="Sharing.Guru Logo" className="h-8 lg:h-10 w-auto" />
+                    Sharing.Guru
+                  </h1>
                 </div>
-                {/* Search Box - Mobile (shown below title on narrow screens) */}
-                <input
-                  type="text"
-                  placeholder="Search locations..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="md:hidden w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm mt-2"
-                />
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
@@ -427,9 +409,16 @@ export default function Dashboard() {
             <div>
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
                 <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                    Locations
-                  </h2>
+                  <div className="flex items-center justify-between gap-4">
+                    {/* Filter Box */}
+                    <input
+                      type="text"
+                      placeholder="Filter locations..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="flex-1 max-w-md px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    />
+                  </div>
 
                   {/* No rate limit warnings for NYC/Data.gov */}
 

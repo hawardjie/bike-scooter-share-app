@@ -280,92 +280,96 @@ export default function FilterSidebar({
               </div>
             </div>
 
-            {/* Divider */}
-            <div className="border-t border-gray-200 dark:border-gray-700"></div>
+            {/* Stats Section - Only show if bike/scooter data is displayed */}
+            {(filters.showBikeStations || filters.showFreeBikes || filters.showActiveOnly) && (
+              <>
+                {/* Divider */}
+                <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
-            {/* Stats Section */}
-            <div>
-              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
-                <span className="text-lg">📊</span>
-                Statistics
-              </h3>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                    <span className="text-lg">📊</span>
+                    Bike & Scooter Statistics
+                  </h3>
 
-              {/* Showing data from */}
-              {operators && operators.length > 0 && (
-                <div className="mb-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
-                  <h4 className="text-xs font-semibold text-blue-900 dark:text-blue-100 mb-2">
-                    Showing data from:
-                  </h4>
-                  <div className="flex flex-wrap gap-1.5">
-                    {operators.map((op: any, idx: number) => (
-                      <span
-                        key={idx}
-                        className="px-2 py-0.5 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 rounded-full text-xs font-medium"
-                      >
-                        {op.name} ({op.location})
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="space-y-2">
-                {/* Total Stations */}
-                <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3 border border-purple-200 dark:border-purple-700">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🚉</span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">Total Stations</span>
+                  {/* Showing data from */}
+                  {operators && operators.length > 0 && (
+                    <div className="mb-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+                      <h4 className="text-xs font-semibold text-blue-900 dark:text-blue-100 mb-2">
+                        Showing data from:
+                      </h4>
+                      <div className="flex flex-wrap gap-1.5">
+                        {operators.map((op: any, idx: number) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-0.5 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-100 rounded-full text-xs font-medium"
+                          >
+                            {op.name} ({op.location})
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <span className="text-lg font-bold text-purple-700 dark:text-purple-300">{stats.totalStations.toLocaleString()}</span>
-                  </div>
-                </div>
+                  )}
 
-                {/* Active Stations */}
-                <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-200 dark:border-green-700">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">✅</span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">Active Stations</span>
+                  <div className="space-y-2">
+                    {/* Total Stations */}
+                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-3 border border-purple-200 dark:border-purple-700">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">🚉</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400">Total Stations</span>
+                        </div>
+                        <span className="text-lg font-bold text-purple-700 dark:text-purple-300">{stats.totalStations.toLocaleString()}</span>
+                      </div>
                     </div>
-                    <span className="text-lg font-bold text-green-700 dark:text-green-300">{stats.activeStations.toLocaleString()}</span>
-                  </div>
-                </div>
 
-                {/* Available Bikes */}
-                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-700">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🚲</span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">Available Bikes</span>
+                    {/* Active Stations */}
+                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-200 dark:border-green-700">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">✅</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400">Active Stations</span>
+                        </div>
+                        <span className="text-lg font-bold text-green-700 dark:text-green-300">{stats.activeStations.toLocaleString()}</span>
+                      </div>
                     </div>
-                    <span className="text-lg font-bold text-blue-700 dark:text-blue-300">{stats.totalBikes.toLocaleString()}</span>
-                  </div>
-                </div>
 
-                {/* Available Docks */}
-                <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3 border border-orange-200 dark:border-orange-700">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🅿️</span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">Available Docks</span>
+                    {/* Available Bikes */}
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-700">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">🚲</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400">Available Bikes</span>
+                        </div>
+                        <span className="text-lg font-bold text-blue-700 dark:text-blue-300">{stats.totalBikes.toLocaleString()}</span>
+                      </div>
                     </div>
-                    <span className="text-lg font-bold text-orange-700 dark:text-orange-300">{stats.totalDocks.toLocaleString()}</span>
-                  </div>
-                </div>
 
-                {/* Free Vehicles */}
-                <div className="bg-pink-50 dark:bg-pink-900/20 rounded-lg p-3 border border-pink-200 dark:border-pink-700">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🛴</span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">Free Vehicles</span>
+                    {/* Available Docks */}
+                    <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3 border border-orange-200 dark:border-orange-700">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">🅿️</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400">Available Docks</span>
+                        </div>
+                        <span className="text-lg font-bold text-orange-700 dark:text-orange-300">{stats.totalDocks.toLocaleString()}</span>
+                      </div>
                     </div>
-                    <span className="text-lg font-bold text-pink-700 dark:text-pink-300">{stats.freeBikes.toLocaleString()}</span>
+
+                    {/* Free Vehicles */}
+                    <div className="bg-pink-50 dark:bg-pink-900/20 rounded-lg p-3 border border-pink-200 dark:border-pink-700">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">🛴</span>
+                          <span className="text-xs text-gray-600 dark:text-gray-400">Free Vehicles</span>
+                        </div>
+                        <span className="text-lg font-bold text-pink-700 dark:text-pink-300">{stats.freeBikes.toLocaleString()}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </>
+            )}
 
             {/* Parking info note */}
             {parkingEnabled && filters.showParkingSpots && parkingAvailable === 0 && (
