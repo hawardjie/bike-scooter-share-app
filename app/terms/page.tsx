@@ -8,14 +8,39 @@ export const metadata: Metadata = {
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-        <Link
-          href="/"
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-6"
-        >
-          &larr; Back to Dashboard
-        </Link>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Header */}
+      <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
+        <div className="px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-1">
+              <div className="flex-shrink-0">
+                <Link href="/" className="block">
+                  <h1 className="text-3xl lg:text-4xl font-bold flex items-center gap-2 font-[family-name:var(--font-italiana)]" style={{ color: 'rgb(52, 211, 153)' }}>
+                    <img src="/images/logo.png" alt="Sharing.Guru Logo" className="h-8 lg:h-10 w-auto" />
+                    Sharing.Guru
+                  </h1>
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-xs lg:text-sm text-gray-600 dark:text-gray-400">
+                Live Data
+              </span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
+          <Link
+            href="/"
+            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-6"
+          >
+            &larr; Back to Dashboard
+          </Link>
 
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-[family-name:var(--font-italiana)]">
           Terms of Service
@@ -161,6 +186,7 @@ export default function TermsOfService() {
           </section>
         </div>
       </div>
+    </div>
     </div>
   );
 }
