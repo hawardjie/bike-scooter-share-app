@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Italiana } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
 const italiana = Italiana({
   weight: '400',
@@ -29,8 +30,9 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body className={`${italiana.variable} antialiased`}>
+      <body className={`${italiana.variable} antialiased flex flex-col min-h-screen`}>
         {children}
+        <Footer />
       </body>
     </html>
   );
